@@ -1,0 +1,10 @@
+D:\徐澳\工程\pp\bin\Debug\pp.exe.config
+D:\徐澳\工程\pp\bin\Debug\pp.exe
+D:\徐澳\工程\pp\bin\Debug\pp.pdb
+D:\徐澳\工程\pp\obj\Debug\pp.csprojAssemblyReference.cache
+D:\徐澳\工程\pp\obj\Debug\pp.Properties.Resources.resources
+D:\徐澳\工程\pp\obj\Debug\pp.csproj.GenerateResource.cache
+D:\徐澳\工程\pp\obj\Debug\pp.csproj.CoreCompileInputs.cache
+D:\徐澳\工程\pp\obj\Debug\pp.exe
+D:\徐澳\工程\pp\obj\Debug\pp.pdb
+D:\徐澳\工程\pp\obj\Debug\pp.PP.resources
