@@ -1,0 +1,20 @@
+D:\徐澳\工程\PPserver\bin\Debug\PPserver.exe.config
+D:\徐澳\工程\PPserver\bin\Debug\PPserver.exe
+D:\徐澳\工程\PPserver\bin\Debug\PPserver.pdb
+D:\徐澳\工程\PPserver\obj\Debug\PPserver.csprojAssemblyReference.cache
+D:\徐澳\工程\PPserver\obj\Debug\PPserver.Form1.resources
+D:\徐澳\工程\PPserver\obj\Debug\PPserver.Properties.Resources.resources
+D:\徐澳\工程\PPserver\obj\Debug\PPserver.csproj.GenerateResource.cache
+D:\徐澳\工程\PPserver\obj\Debug\PPserver.csproj.CoreCompileInputs.cache
+D:\徐澳\工程\PPserver\obj\Debug\PPserver.exe
+D:\徐澳\工程\PPserver\obj\Debug\PPserver.pdb
+F:\VS program\clone code\pp\PPserver\bin\Debug\PPserver.exe.config
+F:\VS program\clone code\pp\PPserver\bin\Debug\PPserver.exe
+F:\VS program\clone code\pp\PPserver\bin\Debug\PPserver.pdb
+F:\VS program\clone code\pp\PPserver\obj\Debug\PPserver.Form1.resources
+F:\VS program\clone code\pp\PPserver\obj\Debug\PPserver.Properties.Resources.resources
+F:\VS program\clone code\pp\PPserver\obj\Debug\PPserver.csproj.GenerateResource.cache
+F:\VS program\clone code\pp\PPserver\obj\Debug\PPserver.csproj.CoreCompileInputs.cache
+F:\VS program\clone code\pp\PPserver\obj\Debug\PPserver.exe
+F:\VS program\clone code\pp\PPserver\obj\Debug\PPserver.pdb
+F:\VS program\clone code\pp\PPserver\obj\Debug\PPserver.csprojAssemblyReference.cache
