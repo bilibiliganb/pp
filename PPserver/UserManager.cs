@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pp
+namespace PPserver
 {
-    class Data
+    namespace UserManager
     {
-        public static string UID = "", UName = "";//登录名的ID和姓名
+        public enum UserState { online, offline, busy };
+
     }
 }

@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
+using System.Data.SqlClient;
+using PPserver.Correspondence;
+using PPserver.Data;
 
 namespace PPserver
 {
@@ -54,7 +57,6 @@ namespace PPserver
                 {
                     socketSend = socketWatch.Accept();
                     //192.168.0.6:连接成功
-
                     ShowMsg(socketSend.RemoteEndPoint.ToString() + ":" + "连接成功");
                     //开启新线程接收客户端不断发来的消息
                     Thread th = new Thread(Recive);
@@ -74,7 +76,6 @@ namespace PPserver
         /// <param name="o"></param>
         void Recive(object o)
         {
-            Socket socketSend = o as Socket;
             while (true)
             {
                 try
@@ -85,7 +86,19 @@ namespace PPserver
                     int r = socketSend.Receive(buffer);
                     if (r == 0) break;
                     string str = Encoding.UTF8.GetString(buffer, 0, r);
-                    ShowMsg(socketSend.RemoteEndPoint + ":" + str);
+                    Command command = Interpreter.getData(str);
+                    if(command.command_type== Correspondence.Type.login)
+                    {
+                        Login lg = (Login)command;
+                        if (verify(lg))
+                        {
+                            ShowMsg("用户" + lg.userid + "登录成功！");
+                            response(lg.userid, socketSend,true);
+                        }
+                        else{
+                            response(lg.userid, socketSend,false);
+                        }
+                    }
                 }
                 catch { }
             }
@@ -108,6 +121,60 @@ namespace PPserver
             socketSend.Send(buffer);
             ShowMsg("我:" + str);
             txtMsg.Text = "";
+        }
+
+        /// <summary>
+        /// 发送respond报文
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="socket"></param>
+        private void response(string userid,Socket socket,bool tag)      
+        {
+            if(tag==true)
+            {
+                UserData userdata = new UserData();
+                string sql = "select * from dbo.t_userbase where id='" + userid + "'";
+                Dao dao = new Dao();
+                dao.connect();
+                SqlDataReader reader = dao.read(sql);
+                while (reader.Read())
+                {
+                    userdata.userid = reader["id"].ToString();
+                    userdata.psw = reader["psw"].ToString();
+                    userdata.name = reader["name"].ToString();
+                    userdata.sex = reader["sex"].ToString();
+                    userdata.birth = DateTime.Parse(reader["birth"].ToString());
+                    userdata.image = reader["image"].ToString();
+                    userdata.phone = reader["phone"].ToString();
+
+                    Respond respond = new Respond(userdata, null, null, null, null);
+                    Interpreter interpreter = new Interpreter(respond);
+                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(interpreter.getSerialization());
+                    socket.Send(buffer);
+                }
+                dao.close();
+            }
+            else
+            {
+                Respond respond = new Respond(null, null, null, null, null);
+                Interpreter interpreter = new Interpreter(respond);
+                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(interpreter.getSerialization());
+                socket.Send(buffer);
+            }
+        }
+        private bool verify(Login lg)
+        {
+            string sql = "select * from dbo.t_userbase where id='" + lg.userid + "' and psw='" + lg.psw + "'";
+            Dao dao = new Dao();
+            dao.connect();
+            SqlDataReader reader = dao.read(sql);
+            if (reader.Read())
+            {
+                dao.close();
+                return true;
+            }
+            dao.close();
+            return false;
         }
     }
 }
